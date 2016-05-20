@@ -1,0 +1,49 @@
+{
+  "id": "cybershop-rest-api-3.1.1",
+  "instances": 1,
+  "cpus": 1,
+  "mem": 2048,
+  "container": {
+    "type": "DOCKER",
+    "volumes": [],
+    "docker": {
+      "image": "docker-hub.product.co-mall:5000/cybershop-rest-api-3.1.1-SNAPSHOT.war",
+      "network": "BRIDGE",
+      "portMappings": [
+        {
+          "containerPort": 8080,
+          "hostPort": 0,
+          "servicePort": 0,
+          "protocol": "tcp"
+        }
+      ],
+      "privileged": false,
+      "parameters": [
+        {
+          "key": "volume-driver",
+          "value": "nfs"
+        },
+        {
+          "key": "volume",
+          "value": "10.201.201.21/mnt/disks/CyberShopUpload:/usr/local/tomcat/webapps/ROOT/assets/upload"
+        },
+        {
+          "key": "volume",
+          "value": "10.201.201.21/mnt/disks/DockerShare/tomcat-logs/cybershop-web:/usr/local/tomcat/logs"
+        }
+      ],
+      "forcePullImage": true
+    }
+  },
+  "healthChecks": [
+    {
+      "protocol": "TCP",
+      "portIndex": 0,
+      "gracePeriodSeconds": 300,
+      "intervalSeconds": 60,
+      "timeoutSeconds": 20,
+      "maxConsecutiveFailures": 3,
+      "ignoreHttp1xx": false
+    }
+  ]
+}
