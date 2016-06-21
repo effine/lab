@@ -1,5 +1,3 @@
-  version: 2.0.0
-host: api.product.co-mall
 schemes:
   - https
 basePath: /api
